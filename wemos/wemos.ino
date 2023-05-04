@@ -19,20 +19,17 @@ void setup() {
   WiFi.begin(ssid, password);  
   
   timeClient.begin();
-  timeClient.setTimeOffset(7200);
+  timeClient.setTimeOffset(7200);//adjusted for CET timezone
 }
  
 void loop() {
 
-  if(WiFi.status() == WL_CONNECTED){
-    digitalWrite(BUILTIN_LED, LOW);
-  }else{
-    digitalWrite(BUILTIN_LED, HIGH);
-    while(WiFi.status() != WL_CONNECTED){
-      delay(500);
+  while(WiFi.status() != WL_CONNECTED){      
+      digitalWrite(BUILTIN_LED, HIGH);
+       delay(500);
       Serial.print(".");
-    }
   }
+  digitalWrite(BUILTIN_LED, LOW);
   int signal[59];
 
   get_time(signal);
