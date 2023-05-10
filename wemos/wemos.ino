@@ -5,8 +5,8 @@
 
 
 // Network credentials
-const char* ssid = "DESKTOP-J4EC1OB 4992";
-const char* password = "hrvojekeks";
+const char* ssid = "";
+const char* password = "";
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
