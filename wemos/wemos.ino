@@ -35,11 +35,6 @@ void loop() {
   get_time(signal);
 
   for(int i = 0; i<60;i++){
-    if(signal[i] == 1){
-      digitalWrite(16, HIGH);//fix for external LED
-    }else{
-      digitalWrite(16, LOW);//fix for external LED
-    }
     Serial.println();
     Serial.print (i);
     Serial.print(" ");
@@ -51,11 +46,14 @@ void loop() {
 
 void get_time(int signal[59]
   ){
-
-  delay(10000);//wait for NTP to be contacted
-  timeClient.update();
-  long int T = timeClient.getEpochTime();
-
+  long int T = 0;
+  while(T==0)
+  {
+    timeClient.update();
+    T = timeClient.getEpochTime();
+    Serial.print(T);
+    delay(10);
+  }
   time_t epochTime = T;
   struct tm *current_time = localtime(&epochTime);  
   
